@@ -75,10 +75,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 new Response.Listener<JSONObject>() {
                 @Override
                     public void onResponse(JSONObject response){
-                        long timestamp =Long.parseLong(response.optString("dstOffset").toString()) + Long.parseLong(response.optString("rawOffset").toString());
-                        Calendar UTC = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-                        long current_timestamp = UTC.getTimeInMillis()+Long.parseLong("14400000");
-                        java.util.Date date = new java.util.Date(current_timestamp);
+                        Calendar time = Calendar.getInstance(TimeZone.getTimeZone(response.optString("timeZoneId").toString()));
+                        timeView.setText(time.getTime().toString());
                 }
 
         }, new Response.ErrorListener(){
